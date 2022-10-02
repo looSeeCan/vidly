@@ -1,4 +1,3 @@
-import { Button } from 'bootstrap';
 import React, { Component } from 'react';
 import { getMovies } from './fakeMovieService';
 
@@ -9,7 +8,7 @@ class Movie extends Component {
         movies: getMovies() ///  calls the getMovies function and returns the movies array of objects
     };
 
-    handleDelete(movie) {
+    handleDelete(movie) {/// updating the state
         console.table(movie);
         /// use setState and make an array with all the movies except for the one we delete
         // const movieArrayWithoutDeletedMovie = this.state.movies.filter(m => m._id !== movie._id);
@@ -31,9 +30,16 @@ class Movie extends Component {
     };
 
     render() {
+        const {length: count} = this.state.movies;/// object destructuring. length: the length property of the movies array. and rename it :count
+        if(this.state.movies.length === 0) { /// conditional rendering
+            return <p>There are no movies in the database</p>/// this message will appear at the top of the page.
+        } ///when there are no movies in the database 
+        
         return (
-           // {/* /// zen coding */}
-            //{/* ///type the above zen coding and press enter to get the table below */}
+            <React.Fragment>
+            <p>Showing {this.state.movies.length} movies in the database</p>
+            {/* /// zen coding */}
+            {/* ///type the above zen coding and press enter to get the table below */}
             <table className="table">
                 <thead>
                     <tr>
@@ -55,9 +61,9 @@ class Movie extends Component {
                     
                 </tbody> */}
             </table>
-
-            
-        )
+        </React.Fragment>
+        );
+        
     }
 };
 
